@@ -1,109 +1,127 @@
-Resume Analysis Chatbot
-Overview
-The Resume Analysis Chatbot is a Streamlit-based web application that allows users to upload a PDF resume and ask questions about the candidate's qualifications, experience, or skills. The application processes the resume using natural language processing (NLP) techniques, including document loading, text splitting, embeddings, and a retrieval-based question-answering system powered by LangChain and FAISS. The chatbot leverages the Ollama model (llama3.1:8b) for generating professional responses based on the resume content.
-Features
+# Resume Analysis Chatbot
 
-Resume Upload: Upload a PDF resume for analysis.
-Question Answering: Ask questions about the resume, and receive answers based on the document's content.
-Persistent Chat History: Maintains a conversation history across interactions.
-Clear Chat History: Option to reset the chat history.
-Source Document Reference: Displays excerpts from the resume used to generate answers.
-Professional Responses: Answers are provided in a professional tone with details extracted from the resume.
+## Overview
 
-Prerequisites
+The **Resume Analysis Chatbot** is a Streamlit-based web application that allows users to upload a PDF resume and interactively ask questions about the candidate's qualifications, experience, and skills. It processes the resume using Natural Language Processing (NLP) techniques including text extraction, chunking, embeddings, and retrieval-based question answering.
 
-Python 3.8+
-A compatible environment with the required Python libraries (see Installation section).
-Access to the Ollama model (llama3.1:8b) running locally or via a server.
-A PDF resume file for analysis.
+The chatbot leverages:
+- **LangChain** for document processing,
+- **FAISS** for vector-based retrieval,
+- **Sentence Transformers** for embeddings,
+- **Ollama (llama3.1:8b)** as the local language model for generating professional responses.
 
-Installation
+---
 
-Clone the Repository:
+## Features
+
+- 📄 **Resume Upload** – Upload and analyze a PDF resume.
+- 💬 **Question Answering** – Ask questions based on the resume content.
+- 🧠 **Persistent Chat History** – Maintains conversation state during a session.
+- ♻️ **Clear Chat History** – Reset chat history with one click.
+- 📚 **Source Document Reference** – Shows source excerpts used to generate answers.
+- 🎓 **Professional Responses** – Answers are formal and informed by actual resume content.
+
+---
+
+## Prerequisites
+
+- Python 3.8+
+- PDF resume (text-extractable, not scanned images)
+- Ollama with the llama3.1:8b model installed and running locally or remotely
+- Required Python libraries
+
+---
+
+## Installation
+
+### 1. Clone the Repository
+
+bash
 git clone <repository-url>
 cd resume-analysis-chatbot
 
-
-Set Up a Virtual Environment (optional but recommended):
+### 2. Set Up a Virtual Environment (optional but recommended)
+bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+# On Windows:
+venv\Scripts\activate
 
+### 3. Install Dependencies
 
-Install Dependencies:Install the required Python packages using the provided requirements.txt or manually:
-pip install streamlit langchain langchain-community faiss-cpu sentence-transformers ollama
+bash
+pip install -r requirements.txt
 
+### 4. Set up Ollama
+- Install Ollama: https://ollama.com
 
-Set Up Ollama:
+- Pull the LLaMA 3.1 model:
+bash
+ollama pull llama3.1:8b
 
-Install Ollama following the instructions at Ollama.
-Pull the llama3.1:8b model:ollama pull llama3.1:8b
-
-
-Ensure the Ollama server is running locally or accessible.
-
-
-
-Usage
-
-Run the Application:
+# Usage
+### 1. Run the Application
+bash
 streamlit run app.py
+#This will open the Streamlit interface in your browser.
 
-This will launch the Streamlit web interface in your default browser.
+### 2. Upload a Resume
+- Use the sidebar to upload a PDF resume
 
-Upload a Resume:
+- The system will extract, chunk, and embed the text
 
-Use the sidebar to upload a PDF resume.
-The application will process the resume and prepare it for question-answering.
+### 3. Ask Questions
+Examples:
+
+- "What is the candidate's most recent job?"
+
+- "What skills are listed in the resume?"
+
+### 4. Clear Chat History
+Click the Clear Chat History button to reset the conversation
+
+📁 Project Structure
+
+bash
+
+resume-analysis-chatbot/
+├── app.py              # Main Streamlit app script
+├── requirements.txt    # List of Python dependencies
+└── README.md           # Project documentation (this file)
 
 
-Ask Questions:
+📦 Dependencies
+- streamlit – Web UI framework
 
-Enter questions about the resume in the chat input box (e.g., "What is the candidate's most recent job?" or "What skills are listed in the resume?").
-The chatbot will respond based on the resume content, displaying the answer and relevant source document excerpts.
+- langchain, langchain-community – Document parsing and question answering
+
+- faiss-cpu – Vector similarity search
+
+- sentence-transformers – For generating embeddings (e.g., all-MiniLM-L6-v2)
+
+- ollama – For using the LLaMA 3.1 model locally
+
+- PyPDFLoader – For extracting text from PDF resumes
+
+📝 Notes
+- The Ollama server must be running before launching the app
+
+- Only one resume can be processed at a time – uploading a new one replaces the old
+
+- Resume should be text-based PDFs (no images or scans)
+
+- Uploaded files are stored temporarily and auto-deleted
 
 
-Clear Chat History:
+📜 License
+This project is licensed under the MIT License – see the LICENSE file for details.
 
-Click the "Clear Chat History" button to reset the conversation.
+yaml
+---
 
+Let me know if you also want:
 
-
-Project Structure
-
-app.py: The main Streamlit application script containing the chatbot logic.
-README.md: This file, providing project documentation.
-requirements.txt: List of required Python packages (create this based on the dependencies listed above).
-
-Dependencies
-
-streamlit: For the web interface.
-langchain and langchain-community: For document processing and retrieval-based question answering.
-faiss-cpu: For vector storage and similarity search.
-sentence-transformers: For generating embeddings using the all-MiniLM-L6-v2 model.
-ollama: For interfacing with the llama3.1:8b language model.
-PyPDFLoader: For loading and parsing PDF resumes.
-
-Notes
-
-The application assumes the Ollama server is running locally with the llama3.1:8b model available.
-The resume must be in PDF format, and the content should be text-extractable (not scanned images).
-The chatbot may not answer questions accurately if the resume lacks the relevant information.
-The application uses temporary storage for uploaded files, which are automatically cleaned up.
-
-Limitations
-
-The accuracy of responses depends on the quality of the resume and the capabilities of the llama3.1:8b model.
-The application processes one resume at a time; re-uploading a new resume overwrites the previous analysis.
-Large resumes may increase processing time due to text splitting and embedding generation.
-
-Future Improvements
-
-Support for multiple resume formats (e.g., DOCX, TXT).
-Integration with additional language models or cloud-based APIs.
-Enhanced UI with more interactive features, such as resume summary generation.
-Support for multilingual resumes using appropriate embeddings and models.
-
-Contributing
-Contributions are welcome! Please submit a pull request or open an issue on the repository for suggestions or bug reports.
-License
-This project is licensed under the MIT License.
+- requirements.txt file generated  
+- LICENSE file (MIT template)  
+- A basic app.py template to start with
