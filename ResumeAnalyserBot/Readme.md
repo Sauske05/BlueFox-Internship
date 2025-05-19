@@ -36,36 +36,37 @@ The chatbot leverages:
 
 ### 1. Clone the Repository
 
-bash
+```bash
 git clone <repository-url>
 cd resume-analysis-chatbot
-
+```
 ### 2. Set Up a Virtual Environment (optional but recommended)
-bash
+```bash
 python -m venv venv
 # On macOS/Linux:
 source venv/bin/activate
 # On Windows:
 venv\Scripts\activate
-
+```
 ### 3. Install Dependencies
 
-bash
+```bash
 pip install -r requirements.txt
 
 ### 4. Set up Ollama
 - Install Ollama: https://ollama.com
 
 - Pull the LLaMA 3.1 model:
-bash
+```
+```bash
 ollama pull llama3.1:8b
-
+```
 # Usage
 ### 1. Run the Application
-bash
+```bash
 streamlit run app.py
 #This will open the Streamlit interface in your browser.
-
+```
 ### 2. Upload a Resume
 - Use the sidebar to upload a PDF resume
 
@@ -83,13 +84,13 @@ Click the Clear Chat History button to reset the conversation
 
 📁 Project Structure
 
-bash
+```bash
 
 resume-analysis-chatbot/
 ├── app.py              # Main Streamlit app script
 ├── requirements.txt    # List of Python dependencies
 └── README.md           # Project documentation (this file)
-
+```
 
 📦 Dependencies
 - streamlit – Web UI framework
@@ -117,7 +118,7 @@ resume-analysis-chatbot/
 📜 License
 This project is licensed under the MIT License – see the LICENSE file for details.
 
-yaml
+```yaml
 ---
 
 Let me know if you also want:
@@ -125,3 +126,4 @@ Let me know if you also want:
 - requirements.txt file generated  
 - LICENSE file (MIT template)  
 - A basic app.py template to start with
+```
